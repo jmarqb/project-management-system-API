@@ -12,7 +12,7 @@ services:
       - mongo
     volumes:
       - ./:/usr/src/app
-    command: npm run start:prod
+    command: npm run start
     environment:
       - PORT=3000
       - JWT_SECRET=your_secret_json_web_token
