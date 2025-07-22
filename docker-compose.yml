@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: projects_management_system_app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongo
+    volumes:
+      - ./:/usr/src/app
+    command: npm run start:prod
+    environment:
+      - PORT=3000
+      - JWT_SECRET=your_secret_json_web_token
+      - DATABASE_URL=mongodb://mongo:27017/projects_management_system_database
+
+  mongo:
+    image: mongo:6.0.1
+    container_name: mongodb_container
+    restart: unless-stopped
+    ports:
+      - '27018:27017'
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
