@@ -9,7 +9,12 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(envs.databaseUrl),
+    MongooseModule.forRootAsync({
+      useFactory:async() => ({
+        uri: envs.databaseUrl,
+        autoCreate: true,
+      }),
+    }),
     ProjectModule,
     ProjectUserModule,
     TaskModule,
