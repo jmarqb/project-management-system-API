@@ -1,5 +1,4 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppModule } from '../app.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
@@ -7,7 +6,6 @@ import { User } from './entities/user.entity';
 import { AuthController } from './auth.controller';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { getModelToken } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
 
 describe('AuthModule', () => {
   let module: TestingModule;
@@ -20,16 +18,20 @@ describe('AuthModule', () => {
           secret: 'secret-key',
           signOptions: { expiresIn: '2h' },
         }),
-        AppModule,
       ],
+      controllers: [AuthController],
       providers: [
         {
           provide: AuthService,
           useValue: {},
         },
         {
+          provide: JwtStrategy,
+          useValue: {},
+        },
+        {
           provide: getModelToken(User.name),
-          useValue: Model,
+          useValue: {},
         },
       ],
     }).compile();
