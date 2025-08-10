@@ -15,7 +15,6 @@ import { User, UserSchema } from './entities/user.entity';
     PassportModule.register({ defaultStrategy: 'jwt' }),
 
     JwtModule.register({
-      global: true,
       secret: envs.jwt_secret,
       signOptions: { expiresIn: '2h' },
     }),
