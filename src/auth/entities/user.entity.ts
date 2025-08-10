@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 import { UserRoleEnum } from '../constants/user-role.enum';
-import { ProjectUserRoleEnum } from '../../project-user/constants';
 
 @Schema()
 export class User {
@@ -53,8 +52,8 @@ export class User {
 
   @ApiProperty({
     example: '[ROLE1,ROLE2]',
-    description: 'Defining the project-user role',
-    enum: Object.values(ProjectUserRoleEnum),
+    description: 'Defining the user role',
+    enum: Object.values(UserRoleEnum),
   })
   @Prop([
     {
