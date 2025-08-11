@@ -25,6 +25,7 @@ import {
 } from '../common';
 import { Project } from './entities';
 import { MembersToProjectDto } from './dto/members-to-project.dto';
+import { CacheTTL } from "@nestjs/cache-manager";
 
 @Controller('projects')
 @ApiBearerAuth()
@@ -55,6 +56,7 @@ export class ProjectController {
     return this.projectService.create(createProjectDto, user);
   }
 
+  @CacheTTL(10000)
   @Get()
   @Auth(UserRoleEnum.USER, UserRoleEnum.ADMIN)
   @ApiOperation({
@@ -74,6 +76,7 @@ export class ProjectController {
     return this.projectService.findAll(paginationDto, user);
   }
 
+  @CacheTTL(10000)
   @Get(':id')
   @Auth(UserRoleEnum.USER, UserRoleEnum.ADMIN)
   @ApiOperation({
