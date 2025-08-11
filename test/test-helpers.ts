@@ -1,4 +1,4 @@
-import { GenericContainer, StartedTestContainer, Wait } from "testcontainers";
+import { GenericContainer, StartedTestContainer, Wait } from 'testcontainers';
 import { envs } from '../src/config';
 
 let mongoDBContainer: StartedTestContainer | null = null;
@@ -14,7 +14,7 @@ export async function startMongoTestContainer(): Promise<string> {
     console.log('Starting MongoDB TestContainer...');
 
     mongoDBContainer = await new GenericContainer('mongo:6.0.1')
-     .withExposedPorts(27017)
+      .withExposedPorts(27017)
       .start();
   }
 
