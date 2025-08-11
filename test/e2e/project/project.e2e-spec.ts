@@ -511,8 +511,8 @@ describe('ProjectController (e2e)', () => {
     });
   });
 
-  describe("/projects/:projectId/members/:memberId (DELETE)", () => {
-    it("should remove a member from project",async () => {
+  describe('/projects/:projectId/members/:memberId (DELETE)', () => {
+    it('should remove a member from project', async () => {
       //Arrange
       //First: create a project and insert a new User to become a member
       const dto: CreateProjectDto = {
@@ -542,7 +542,7 @@ describe('ProjectController (e2e)', () => {
         usersIds: [memberId],
       };
 
-     const responseToAddingMember = await request(app.getHttpServer())
+      const responseToAddingMember = await request(app.getHttpServer())
         .post(`/projects/${projectId}/members`)
         .set('Authorization', `Bearer ${userToken}`)
         .send(memberDto);
@@ -571,7 +571,7 @@ describe('ProjectController (e2e)', () => {
       // ACT
       const response = await request(app.getHttpServer())
         .delete(`/projects/${projectId}/members/${memberId}`)
-        .set('Authorization',`Bearer ${userToken}`)
+        .set('Authorization', `Bearer ${userToken}`)
         .send();
 
       // ASSERT

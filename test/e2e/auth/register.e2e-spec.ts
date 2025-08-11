@@ -1,5 +1,8 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
-import { startMongoTestContainer, stopMongoTestContainer, } from '../../test-helpers';
+import {
+  startMongoTestContainer,
+  stopMongoTestContainer,
+} from '../../test-helpers';
 import { Test, TestingModule } from '@nestjs/testing';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppModule } from '../../../src/app.module';
@@ -41,7 +44,7 @@ describe('Auth - Register', () => {
       .post('/auth/register')
       .send();
 
-    const errorMessages =  [
+    const errorMessages = [
       'firstName must be shorter than or equal to 60 characters',
       'firstName must be longer than or equal to 3 characters',
       'firstName should not be empty',
@@ -57,22 +60,21 @@ describe('Auth - Register', () => {
       'password should not be empty',
       'password must be shorter than or equal to 50 characters',
       'password must be longer than or equal to 6 characters',
-      'password must be a string'
+      'password must be a string',
     ];
 
     expect(response.status).toBe(400);
     errorMessages.forEach((message) => {
       expect(response.body.message).toContain(message);
     });
-
   });
-  it('/auth/register (POST) - should create user successfully',async () => {
-    const dto:CreateUserDto ={
+  it('/auth/register (POST) - should create user successfully', async () => {
+    const dto: CreateUserDto = {
       firstName: 'John',
       lastName: 'Doe',
       email: 'hYUkR@example.com',
       password: 'Abc123',
-    }
+    };
     const response = await request(app.getHttpServer())
       .post('/auth/register')
       .send(dto);

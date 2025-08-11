@@ -24,6 +24,7 @@ import {
 } from '../common';
 import { Task } from './entities';
 import { User } from '../auth/entities/user.entity';
+import { CacheTTL } from "@nestjs/cache-manager";
 
 @Controller('tasks')
 @ApiBearerAuth()
@@ -54,6 +55,7 @@ export class TaskController {
     return this.taskService.create(createTaskDto, user);
   }
 
+  @CacheTTL(10000)
   @Get()
   @Auth(UserRoleEnum.USER, UserRoleEnum.ADMIN)
   @ApiOperation({
@@ -73,6 +75,7 @@ export class TaskController {
     return this.taskService.findAll(paginationDto, user);
   }
 
+  @CacheTTL(10000)
   @Get(':id')
   @Auth(UserRoleEnum.USER, UserRoleEnum.ADMIN)
   @ApiOperation({
